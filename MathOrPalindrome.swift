@@ -53,7 +53,7 @@ func calcQuotient(_ numA: Double, _ numB: Double) -> Double {
     } else {
         // Otherwise, calculate and return the quotient
         return numA / numB
-    }   
+    }
 }
 
 // Function to find palindromes
@@ -111,6 +111,7 @@ repeat {
             let input = try String(contentsOfFile: "./MathInput.txt")
 
             // Split the input file into lines
+            // Source: https://developer.apple.com/documentation/foundation/nsstring/components(separatedby:)-238fy
             let lines = input.components(separatedBy: .newlines)
 
             // Initialize the output string
