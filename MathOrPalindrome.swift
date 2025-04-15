@@ -107,11 +107,10 @@ repeat {
 
     if programChoice == "1" {
         do {
-            // open the input file for reading
+            // Open the input file for reading
             let input = try String(contentsOfFile: "./MathInput.txt")
 
             // Split the input file into lines
-            // Source: https://developer.apple.com/documentation/foundation/nsstring/components(separatedby:)-238fy
             let lines = input.components(separatedBy: .newlines)
 
             // Initialize the output string
@@ -119,31 +118,77 @@ repeat {
 
             // Loop through each line in the input file
             for line in lines {
-
-                // If its an addition expression
                 if line.contains(" + ") {
-
                     // Split the line into two numbers
+                    // Source: https://developer.apple.com/documentation/...
+                    // ...foundation/nsstring/components(separatedby:)-238fy
                     let arrayNumStr = line.components(separatedBy: " + ")
 
-                    // Convert the strings to Double
+                    // Convert the strings to doubles
                     let numA = Double(arrayNumStr[0]) ?? 0.0
                     let numB = Double(arrayNumStr[1]) ?? 0.0
 
                     // Call sum function
-                    let sum = calcSum(numA, numB)
+                    let result = calcSum(numA, numB)
 
-                    // Add the expression to the output string
-                    output += "\(line) = \(String(format: "%.2f", sum))\n"
+                    // Add the result to the output string
+                    output += "\(line) = \(String(format: "%.2f", result))\n"
+
+                } else if line.contains(" - ") {
+
+                    // Split the line into two numbers
+                    let arrayNumStr = line.components(separatedBy: " - ")
+
+                    // Convert the strings to doubles
+                    let numA = Double(arrayNumStr[0]) ?? 0.0
+                    let numB = Double(arrayNumStr[1]) ?? 0.0
+
+                    // Call difference function
+                    let result = calcDifference(numA, numB)
+
+                    // Add the result to the output string
+                    output += "\(line) = \(String(format: "%.2f", result))\n"
+
+                } else if line.contains(" * ") {
+
+                    // Split the line into two numbers
+                    let arrayNumStr = line.components(separatedBy: " * ")
+
+                    // Convert the strings to doubles
+                    let numA = Double(arrayNumStr[0]) ?? 0.0
+                    let numB = Double(arrayNumStr[1]) ?? 0.0
+
+                    // Call product function
+                    let result = calcProduct(numA, numB)
+
+                    // Add the result to the output string
+                    output += "\(line) = \(String(format: "%.2f", result))\n"
+
+                } else if line.contains(" / ") {
+
+                    // Split the line into two numbers
+                    let arrayNumStr = line.components(separatedBy: " / ")
+
+                    // Convert the strings to doubles
+                    let numA = Double(arrayNumStr[0]) ?? 0.0
+                    let numB = Double(arrayNumStr[1]) ?? 0.0
+
+                    // call quotient function
+                    let result = calcQuotient(numA, numB)
+
+                    // Add the result to the output string
+                    output += "\(line) = \(String(format: "%.2f", result))\n"
+
+                } else {
+                    // Display error message for invalid expression
+                    output += "\(line) is an invalid expression.\n"
                 }
-                // Add similar code for subtraction, multiplication, and division
             }
 
             // Write the output to the output file
             try output.write(toFile: "./MathOutput.txt", atomically: true, encoding: .utf8)
             print("Successfully wrote to 'MathOutput.txt'")
 
-        // Catch any file errors
         } catch {
             print("Unable to read the file.")
         }
